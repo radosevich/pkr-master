@@ -17,6 +17,7 @@ public final class Constants {
     public static final double kStopSpeed = 0.0; // stop motor speed
 
 // Climb Subsystem
+   
 
 // Drivetrain Subsystem
     public static int kRightLeadID = 1; // CAN value of Right Lead Motor

@@ -34,8 +34,8 @@ public class RobotContainer {
 // The robot's controllers
   private final XboxController m_driverController = 
     new XboxController(Constants.kDriverControllerPort);
-  private final Joystick m_operatorController = 
-    new Joystick(Constants.kOperatorControllerPort);
+  private final XboxController m_operatorController = 
+    new XboxController(Constants.kOperatorControllerPort);
 
 // The robot's autonomous commands
   Command m_autonomousCommand;
@@ -55,7 +55,9 @@ public class RobotContainer {
         -m_driverController.getLeftY(), 
         -m_driverController.getRightX()), 
         m_driveSubsystem));
-    
+
+    // control the climb with the operator joystick pretty please cherry on top
+  
     // Setup autonomous select commands
     m_chooser = new SendableChooser<>();
     m_chooser.setDefaultOption("Do nothing", new AutoDoNothing());
@@ -90,6 +92,7 @@ public class RobotContainer {
     new JoystickButton(m_operatorController, ButtonType.kTrigger.value)
     // Bind the operator joystick trigger button to the launch command
       .onTrue(new TeleopLaunchNote(m_shooter, m_intake));
+    
   }
 
   public Command getAutonomousCommand() {

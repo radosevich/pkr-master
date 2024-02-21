@@ -71,6 +71,7 @@ public class Drivetrain extends SubsystemBase {
     m_leftFollow.follow(m_leftLead);
     m_rightFollow.follow(m_rightLead);
 
+    m_rightLead.setInverted(true);
   
     m_gyro = new AnalogGyro(0);
 
@@ -134,6 +135,6 @@ public class Drivetrain extends SubsystemBase {
     if (Math.abs(move) < 0.1) move = 0;
     if (Math.abs(turn) < 0.1) turn = 0;
 
-    m_robotDrive.arcadeDrive(move, turn);
+    m_robotDrive.arcadeDrive(move, -turn);
   } 
 }
