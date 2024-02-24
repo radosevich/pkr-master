@@ -17,7 +17,8 @@ public final class Constants {
     public static final double kStopSpeed = 0.0; // stop motor speed
 
 // Climb Subsystem
-   
+   public static int kleftclimbID = 7;
+   public static int krightclimbID = 8;
 
 // Drivetrain Subsystem
     public static int kRightLeadID = 1; // CAN value of Right Lead Motor
@@ -55,4 +56,7 @@ public final class Constants {
 // Controllers
     public static final int kDriverControllerPort = 0;
     public static final int kOperatorControllerPort = 1;
+// Cameras
+  public static final int cameraPort = 1;
+  public static final int rampcameraPort = 0;
 }

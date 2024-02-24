@@ -18,11 +18,12 @@ import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.Commands.AutoDoNothing;
 import frc.robot.Commands.AutoLaunchNote;
 import frc.robot.Commands.TeleopLaunchNote;
-
+import frc.robot.Subsystems.Camera;
 import frc.robot.Subsystems.Climb;
 import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
+import frc.robot.Subsystems.Camera;
 
 public class RobotContainer {
 // The robot's subsystems
@@ -30,7 +31,7 @@ public class RobotContainer {
   private final Intake m_intake = new Intake();
   private final Shooter m_shooter = new Shooter();
   private final Climb m_climb = new Climb();
-
+  private final Camera m_camera = new Camera();
 // The robot's controllers
   private final XboxController m_driverController = 
     new XboxController(Constants.kDriverControllerPort);
@@ -55,6 +56,12 @@ public class RobotContainer {
         -m_driverController.getLeftY(), 
         -m_driverController.getRightX()), 
         m_driveSubsystem));
+    
+    m_climb.setDefaultCommand(
+      new InstantCommand(() -> m_climb.ClimbRun(
+        m_operatorController.getLeftY(), 
+        m_operatorController.getRightX()), 
+        m_climb));
 
     // control the climb with the operator joystick pretty please cherry on top
   
