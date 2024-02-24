@@ -26,6 +26,7 @@ import frc.robot.Subsystems.Shooter;
 import frc.robot.Subsystems.Camera;
 
 public class RobotContainer {
+  private int j;
 // The robot's subsystems
   private final Drivetrain m_driveSubsystem = new Drivetrain();
   private final Intake m_intake = new Intake();
@@ -48,19 +49,22 @@ public class RobotContainer {
   public RobotContainer() {
     // setup controller button bindings to commands
     configureBindings();
+    for (;j < 1000 ;) {
+      j = j +1;
+    }
 
     // Teleop default command
     // Control the drive with split-stick arcade controls
     m_driveSubsystem.setDefaultCommand(
       new InstantCommand(() -> m_driveSubsystem.manualDrive(
-        -m_driverController.getLeftY(), 
-        -m_driverController.getRightX()), 
+        m_driverController.getRightX(), 
+        -m_driverController.getLeftY()), 
         m_driveSubsystem));
     
     m_climb.setDefaultCommand(
       new InstantCommand(() -> m_climb.ClimbRun(
         m_operatorController.getLeftY(), 
-        m_operatorController.getRightX()), 
+        m_operatorController.getRightY()), 
         m_climb));
 
     // control the climb with the operator joystick pretty please cherry on top
@@ -76,17 +80,17 @@ public class RobotContainer {
   private void configureBindings() {
   // Configure the button bindings
 
-    new JoystickButton(m_driverController, Button.kRightBumper.value)
+    new JoystickButton(m_driverController, Button.kLeftBumper.value)
     // Intake note into the robot
       .onTrue(new InstantCommand(() -> m_intake.IntakeRun(Constants.kIntakeIn)))
       .onFalse(new InstantCommand(() -> m_intake.IntakeRun(Constants.kStopSpeed)));
 
-    new JoystickButton(m_driverController, Button.kLeftBumper.value)
+    new JoystickButton(m_driverController, Button.kX.value)
     // Reverse the intake direction to clear a jam
       .onTrue(new InstantCommand(() -> m_intake.IntakeRun(Constants.kIntakeOut)))
       .onFalse(new InstantCommand(() -> m_intake.IntakeRun(Constants.kStopSpeed)));
 
-    new JoystickButton(m_driverController, Button.kA.value)
+    new JoystickButton(m_driverController, Button.kRightBumper.value)
     // Launch the note
       .onTrue(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kShooterLaunch)))
       .onFalse(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed)));

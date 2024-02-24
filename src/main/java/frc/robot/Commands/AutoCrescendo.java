@@ -23,13 +23,13 @@ public class AutoCrescendo extends SequentialCommandGroup {
     addCommands(
     // Add your command sequence
       // launch note into speaker at subwoofer
-      new AutoLaunchNote(p_shooter, p_intake),
+      //new AutoLaunchNote(p_shooter, p_intake),
       // move forward past line to pick up note
-      new AutoMove(p_drivetrain, p_waypointIndex, kForward),
+      //new AutoMove(p_drivetrain, p_waypointIndex, kForward),
       // reverse back to subwoofer
-      new AutoMove(p_drivetrain, p_waypointIndex, kBackward),
+      //new AutoMove(p_drivetrain, p_waypointIndex, kBackward),
       // launch note into speaker at subwoofer
-      new AutoLaunchNote(p_shooter, p_intake)
+      //new AutoLaunchNote(p_shooter, p_intake)
     );
   }
 }

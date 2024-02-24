@@ -15,6 +15,7 @@ public class AutoLaunchNote extends Command {
   private final Intake m_intake;
 
   private boolean done;
+  private int i = 0;
 
   public AutoLaunchNote(Shooter shooter, Intake intake) {
     m_shooter = shooter;
@@ -32,13 +33,17 @@ public class AutoLaunchNote extends Command {
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_intake.IntakeRun(Constants.kStopSpeed);
-    m_shooter.ShooterRun(Constants.kShooterLaunch);
-    m_intake.IntakeRun(Constants.kIntakeIn);
+    for (;i < 1000 ;) {
+    //m_intake.IntakeRun(Constants.kStopSpeed);
+      m_shooter.ShooterRun(Constants.kShooterLaunch);
+      i = i + 1;
+    //m_intake.IntakeRun(Constants.kIntakeIn);
+    /*  */
     // shooter does not need to run but intake does in preparation
     // for picking up the next note
-    m_shooter.ShooterRun(Constants.kStopSpeed);
-    done = true;
+    //m_shooter.ShooterRun(Constants.kStopSpeed);
+  }
+  done = true;
     
   }
 

@@ -135,6 +135,6 @@ public class Drivetrain extends SubsystemBase {
     if (Math.abs(move) < 0.1) move = 0;
     if (Math.abs(turn) < 0.1) turn = 0;
 
-    m_robotDrive.arcadeDrive(move, -turn);
+    m_robotDrive.arcadeDrive(-move, -turn);
   } 
 }

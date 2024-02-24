@@ -20,10 +20,13 @@ public class Climb extends SubsystemBase {
     m_rightclimb = new CANSparkMax(Constants.krightclimbID, MotorType.kBrushless);
   }
   
-  public void ClimbRun(double getLeftY, double getRightY) {
+  public void ClimbRun(double leftspeed, double rightspeed) {
   //set motor speed  to intake, eject or stop
-    m_leftclimb.set(getLeftY); 
-    m_rightclimb.set(getRightY);
+    if (Math.abs(leftspeed) < 0.1) leftspeed = 0;
+    if (Math.abs(rightspeed) < 0.1) rightspeed = 0;
+
+    m_leftclimb.set(leftspeed); 
+    m_rightclimb.set(rightspeed);
   }
 }
    

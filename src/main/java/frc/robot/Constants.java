@@ -17,8 +17,8 @@ public final class Constants {
     public static final double kStopSpeed = 0.0; // stop motor speed
 
 // Climb Subsystem
-   public static int kleftclimbID = 7;
-   public static int krightclimbID = 8;
+   public static int kleftclimbID = 10;
+   public static int krightclimbID = 9;
 
 // Drivetrain Subsystem
     public static int kRightLeadID = 1; // CAN value of Right Lead Motor
@@ -49,7 +49,7 @@ public final class Constants {
     public static int kRightShooterID = 7; // CAN value of Right Shooter
     public static int kLeftShooterID = 8; // CAN value of Left Shooter
 
-    public static final double kShooterSpeed = 0.25; // Update this with your desired shooter speed
+    public static final double kShooterSpeed = 0.75; // Update this with your desired shooter speed
     public static final double kShooterLaunch = kShooterSpeed;
     public static final double kShooterEject = -kShooterSpeed;
         

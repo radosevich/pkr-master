@@ -10,44 +10,45 @@ import frc.robot.Constants;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
 
-public class TeleopLaunchNote extends Command {
+public class AutoShoot extends Command {
   private final Shooter m_shooter;
   private final Intake m_intake;
-  private int i = 0;
-  private boolean done;
 
-  public TeleopLaunchNote(Shooter shooter, Intake intake) {
+  private boolean done;
+  private int i = 0;
+
+  public AutoShoot(Shooter shooter, Intake intake) {
     m_shooter = shooter;
     m_intake = intake;
 
     addRequirements(m_shooter, m_intake);
   }
 
+  // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-  // Called when the command is initially scheduled.
     done = false;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    // Start up launch motors
-    if (i<500) {    
-      m_shooter.ShooterRun(Constants.kShooterLaunch);
+     m_intake.IntakeRun(Constants.kStopSpeed);
+      // m_shooter.ShooterRun(Constants.kShooterLaunch);
       i = i + 1;
+      
+        m_shooter.ShooterRun(Constants.kShooterLaunch);
+        i = i + 1;
+
+      //m_intake.IntakeRun(Constants.kIntakeIn);
+      /*  */
+      // shooter does not need to run but intake does in preparation
+      // for picking up the next note
+      //m_shooter.ShooterRun(Constants.kStopSpeed);
     }
-    // start up intake motor
-    i = 0;
-    if( i< 500) {
-      m_intake.IntakeRun(Constants.kIntakeIn);
-      i = i + 1;
-    }
-    //stop all motors
-    m_intake.IntakeRun(Constants.kStopSpeed); 
-    m_shooter.ShooterRun(Constants.kStopSpeed);
-    done = true;
-  }
+    // Remove the duplicate declaration of the 'done' variable
+    // boolean done = true;
+  
 
   // Called once the command ends or is interrupted.
   @Override
