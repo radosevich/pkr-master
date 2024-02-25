@@ -24,14 +24,8 @@ public class TeleopLaunchNote extends Command {
   }
 
   @Override
-  public void initialize() {
-  // Called when the command is initially scheduled.
-    done = false;
-  }
-
-  // Called every time the scheduler runs while the command is scheduled.
-  @Override
-  public void execute() {
+  public void initialize() { 
+    System.out.println("bleh");
     // Start up launch motors
     if (i<500) {    
       m_shooter.ShooterRun(Constants.kShooterLaunch);
@@ -47,6 +41,14 @@ public class TeleopLaunchNote extends Command {
     m_intake.IntakeRun(Constants.kStopSpeed); 
     m_shooter.ShooterRun(Constants.kStopSpeed);
     done = true;
+  // Called when the command is initially scheduled.
+    done = false;
+  }
+
+  // Called every time the scheduler runs while the command is scheduled.
+  @Override
+  public void execute() {
+   
   }
 
   // Called once the command ends or is interrupted.

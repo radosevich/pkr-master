@@ -34,14 +34,14 @@ public class AutoLaunchNote extends Command {
   @Override
   public void execute() {
     for (;i < 1000 ;) {
-    //m_intake.IntakeRun(Constants.kStopSpeed);
+    m_intake.IntakeRun(Constants.kStopSpeed);
       m_shooter.ShooterRun(Constants.kShooterLaunch);
       i = i + 1;
-    //m_intake.IntakeRun(Constants.kIntakeIn);
+    m_intake.IntakeRun(Constants.kIntakeIn);
     /*  */
     // shooter does not need to run but intake does in preparation
     // for picking up the next note
-    //m_shooter.ShooterRun(Constants.kStopSpeed);
+    m_shooter.ShooterRun(Constants.kStopSpeed);
   }
   done = true;
     

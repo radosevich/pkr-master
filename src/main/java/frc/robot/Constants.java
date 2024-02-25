@@ -49,7 +49,7 @@ public final class Constants {
     public static int kRightShooterID = 7; // CAN value of Right Shooter
     public static int kLeftShooterID = 8; // CAN value of Left Shooter
 
-    public static final double kShooterSpeed = 0.75; // Update this with your desired shooter speed
+    public static final double kShooterSpeed = 0.95; // Update this with your desired shooter speed
     public static final double kShooterLaunch = kShooterSpeed;
     public static final double kShooterEject = -kShooterSpeed;
         

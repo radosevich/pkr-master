@@ -100,8 +100,8 @@ public class RobotContainer {
       .onTrue(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kShooterEject)))
       .onFalse(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed)));
 
-    new JoystickButton(m_operatorController, ButtonType.kTrigger.value)
-    // Bind the operator joystick trigger button to the launch command
+    new JoystickButton(m_operatorController, Button.kA.value)
+        // Bind the operator joystick trigger button to the launch command
       .onTrue(new TeleopLaunchNote(m_shooter, m_intake));
     
   }
