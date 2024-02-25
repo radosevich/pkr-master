@@ -14,16 +14,15 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-
+import edu.wpi.first.wpilibj2.command.RunCommand;
+import frc.robot.Commands.AutoCrescendo;
 import frc.robot.Commands.AutoDoNothing;
 import frc.robot.Commands.AutoLaunchNote;
-import frc.robot.Commands.TeleopLaunchNote;
 import frc.robot.Subsystems.Camera;
 import frc.robot.Subsystems.Climb;
 import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Subsystems.Intake;
 import frc.robot.Subsystems.Shooter;
-import frc.robot.Subsystems.Camera;
 
 public class RobotContainer {
   private int j;
@@ -60,7 +59,7 @@ public class RobotContainer {
         m_driverController.getRightX(), 
         -m_driverController.getLeftY()), 
         m_driveSubsystem));
-    
+    // climb
     m_climb.setDefaultCommand(
       new InstantCommand(() -> m_climb.ClimbRun(
         m_operatorController.getLeftY(), 
@@ -71,12 +70,25 @@ public class RobotContainer {
   
     // Setup autonomous select commands
     m_chooser = new SendableChooser<>();
-    m_chooser.setDefaultOption("Do nothing", new AutoDoNothing());
-    m_chooser.addOption("LaunchNoteAuto", new AutoLaunchNote(m_shooter, m_intake));
-    //m_chooser.addOption("Autonomous Distance", new AutonomousDistance(m_drivetrain, m_Tebo));
-    SmartDashboard.putData(m_chooser);
-  }
 
+    m_chooser.setDefaultOption("Do nothing", 
+      new AutoDoNothing());
+    m_chooser.addOption("AutoLaunchNote", 
+      new AutoLaunchNote(m_shooter, m_intake));
+    m_chooser.addOption("Red Left",
+      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 0));
+    m_chooser.addOption("Red Center", 
+      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 1));
+    m_chooser.addOption("Red Right", 
+      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 2));
+    m_chooser.addOption("Blue Left",
+      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 3));
+    m_chooser.addOption("Blue Center", 
+      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 4));
+    m_chooser.addOption("Blue Right", 
+      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 5));
+  }
+  
   private void configureBindings() {
   // Configure the button bindings
 
@@ -100,9 +112,9 @@ public class RobotContainer {
       .onTrue(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kShooterEject)))
       .onFalse(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed)));
 
-    new JoystickButton(m_operatorController, Button.kA.value)
+    new JoystickButton(m_driverController, Button.kA.value)
         // Bind the operator joystick trigger button to the launch command
-      .onTrue(new TeleopLaunchNote(m_shooter, m_intake));
+      .onTrue(new AutoLaunchNote(m_shooter, m_intake));
     
   }
 

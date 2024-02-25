@@ -31,24 +31,31 @@ public class AutoMove extends Command {
 
   // Example waypoint arrays
   private final Pose2d[][] waypointsArray = new Pose2d[][]{
-    {new Pose2d(15.592, 6.547, new Rotation2d(1.963)), new Pose2d(13.75, 7.009, new Rotation2d(1.963))},
-    {new Pose2d(15.206, 5.55, new Rotation2d(3.14)), new Pose2d(13.867, 5.56, new Rotation2d(-3.14))},
-    {new Pose2d(15.549, 4.515, new Rotation2d(2.128)), new Pose2d(13.909, 4.082, new Rotation2d(-3.14))},
-    {new Pose2d(0.866, 4.511, new Rotation2d(-0.993)), new Pose2d(2.623, 4.107, new Rotation2d(.087))},
-    {new Pose2d(1.36, 5.566, new Rotation2d(0.038)), new Pose2d(2.722, 5.573, new Rotation2d(-0.01))},
-    {new Pose2d(0.955, 6.612, new Rotation2d(1.03)), new Pose2d(2.633, 7.014, new Rotation2d(-0.0353))}
+  // Red Left  
+    {new Pose2d(15.79, 6.71, new Rotation2d(2.094)), new Pose2d(13.91, 7.02, new Rotation2d(-3.14))},
+  // Red Center
+    {new Pose2d(15.13, 5.56, new Rotation2d(-3.14)), new Pose2d(13.867, 5.56, new Rotation2d(3.14))},
+  // Red Right
+    {new Pose2d(15.76, 4.42, new Rotation2d(-2.094)), new Pose2d(13.95, 4.11, new Rotation2d(3.14))},
+  // Blue Left
+    {new Pose2d(0.78, 4.39, new Rotation2d(-1.009)), new Pose2d(2.62, 4.11, new Rotation2d(0))},
+  // Blue Center
+    {new Pose2d(1.38, 5.56, new Rotation2d(0)), new Pose2d(2.75, 5.56, new Rotation2d(0))},
+  // Blue Right
+    {new Pose2d(0.81, 6.7, new Rotation2d(0.925)), new Pose2d(2.52, 7.0, new Rotation2d(0))}
   };
 
   public AutoMove(
-  // Creates a new Move command.
     Drivetrain drivetrain, 
     int waypointIndex,
     boolean direction) {
-      m_drivetrain = drivetrain;
-      addRequirements(m_drivetrain);
+    /** Creates a new Move command. */
+    m_drivetrain = drivetrain;
+    addRequirements(m_drivetrain);
 
-      m_waypointIndex = waypointIndex;
-      m_direction = direction;
+    m_waypointIndex = waypointIndex;
+    m_direction = direction;
+
   }
 
   @Override
@@ -59,9 +66,11 @@ public class AutoMove extends Command {
     TrajectoryConfig m_config = new TrajectoryConfig(2, 2);
 
     if (m_direction==kForward) {
+      System.out.println("Move.initialize(kForward)");
       m_startPoseIndex = 0;
       m_finalPoseIndex = 1;
     } else {
+      System.out.println("Move.initialize(kReverse)");
       m_startPoseIndex = 1;
       m_finalPoseIndex = 0;
       m_config.setReversed(true);
@@ -84,10 +93,12 @@ public class AutoMove extends Command {
     
     ChassisSpeeds speeds = m_ramsete.calculate(m_drivetrain.getPose(), reference);
     m_drivetrain.manualDrive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
+    //System.out.println("Move.execute(" + m_drivetrain.getPose() + ")");
   }
 
   @Override
   public void end(boolean interrupted) {
+    System.out.println("Move.end(" + interrupted + ")");
     m_drivetrain.manualDrive(0, 0);
   }
 
