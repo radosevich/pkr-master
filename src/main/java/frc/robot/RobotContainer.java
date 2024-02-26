@@ -87,6 +87,8 @@ public class RobotContainer {
       new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 4));
     m_chooser.addOption("Blue Right", 
       new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 5));
+  
+  SmartDashboard.putData("Chooser", m_chooser);
   }
   
   private void configureBindings() {
