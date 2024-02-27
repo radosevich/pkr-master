@@ -54,15 +54,20 @@ public class RobotContainer {
 
     // Teleop default command
     // Control the drive with split-stick arcade controls
+    // m_driveSubsystem.setDefaultCommand(
+    //   new InstantCommand(() -> m_driveSubsystem.manualDrive(
+    //     -m_driverController.getRightX(), 
+    //     m_driverController.getLeftY()), 
+    //     m_driveSubsystem));
     m_driveSubsystem.setDefaultCommand(
       new InstantCommand(() -> m_driveSubsystem.manualDrive(
-        m_driverController.getRightX(), 
-        -m_driverController.getLeftY()), 
+       -m_driverController.getRightX(), 
+        m_driverController.getLeftY()),
         m_driveSubsystem));
     // climb
     m_climb.setDefaultCommand(
       new InstantCommand(() -> m_climb.ClimbRun(
-        m_operatorController.getLeftY(), 
+        -m_operatorController.getLeftY(), 
         m_operatorController.getRightY()), 
         m_climb));
 

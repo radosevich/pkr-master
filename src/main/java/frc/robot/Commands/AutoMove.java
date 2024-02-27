@@ -92,7 +92,8 @@ public class AutoMove extends Command {
     State reference = m_trajectory.sample(elapsed);
     
     ChassisSpeeds speeds = m_ramsete.calculate(m_drivetrain.getPose(), reference);
-    m_drivetrain.manualDrive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
+    m_drivetrain.manualDrive(-speeds.omegaRadiansPerSecond/4.5, -speeds.vxMetersPerSecond/4.5);
+    //m_drivetrain.manualDrive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
     //System.out.println("Move.execute(" + m_drivetrain.getPose() + ")");
   }
 

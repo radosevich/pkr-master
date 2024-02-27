@@ -72,7 +72,8 @@ public class Drivetrain extends SubsystemBase {
     m_rightFollow.follow(m_rightLead);
 
     m_rightLead.setInverted(true);
-  
+    m_rightFollow.setInverted(true);
+    
     m_gyro = new AnalogGyro(0);
 
     m_leftPIDController = new PIDController(8.5, 0, 0); 
@@ -105,8 +106,9 @@ public class Drivetrain extends SubsystemBase {
     // Deadband gamepad 10%
     if (Math.abs(left) < 0.1) {left = 0.0;}
     if (Math.abs(right) < 0.1) {right = 0.0;}
-    m_leftLead.set(left);
-    m_rightLead.set(right);
+    //m_leftLead.set(left);
+    //m_rightLead.set(right);
+    m_robotDrive.arcadeDrive(left, right);
   }
 
   /** Resets robot odometry. */
@@ -135,6 +137,7 @@ public class Drivetrain extends SubsystemBase {
     if (Math.abs(move) < 0.1) move = 0;
     if (Math.abs(turn) < 0.1) turn = 0;
 
-    m_robotDrive.arcadeDrive(-move, -turn);
+    //m_robotDrive.arcadeDrive(-move, -turn);
+    m_robotDrive.arcadeDrive(move, turn);
   } 
 }
