@@ -37,10 +37,10 @@ public class AutoCrescendo extends SequentialCommandGroup {
       new AutoLaunchNote(m_shooter, m_intake),
       new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed)),
 
-      new AutoMove(m_drivetrain, m_waypointIndex, kForward),
+      new AutoMove(m_drivetrain, m_waypointIndex, kForward, m_intake),
       new InstantCommand(() -> m_intake.IntakeRun(Constants.kStopSpeed)),
 
-      new AutoMove(m_drivetrain, m_waypointIndex, kBackward),
+      new AutoMove(m_drivetrain, m_waypointIndex, kBackward, m_intake),
       new AutoLaunchNote(m_shooter, m_intake),
       
       new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed)),

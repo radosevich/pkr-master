@@ -46,13 +46,25 @@ public class Drivetrain extends SubsystemBase {
       Constants.kRightEncoderPorts[0],
       Constants.kRightEncoderPorts[1],
       Constants.kRightEncoderReversed);
+  
+      public void resetEncoders() {
+        m_leftEncoder.reset();
+        m_rightEncoder.reset();
+      }
+    
+      public int getLeftEncoderCount() {
+        return m_leftEncoder.get();
+      }
+    
+      public int getRightEncoderCount() {
+        return m_rightEncoder.get();
 
   // Gyro
   private final AnalogGyro m_gyro;
   
   // Differential Drive
   private final DifferentialDrive m_robotDrive = 
-    new DifferentialDrive(m_rightLead, m_leftLead);
+    new DifferentialDrive(m_leftLead, m_rightLead);
 
   // PIDcontrollers
   private final PIDController m_leftPIDController;

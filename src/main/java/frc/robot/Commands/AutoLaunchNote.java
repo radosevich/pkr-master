@@ -27,11 +27,11 @@ public class AutoLaunchNote extends SequentialCommandGroup {
       new ParallelCommandGroup(
         new AutoShooterRun(m_shooter),
         new SequentialCommandGroup(
-          new WaitCommand(1),
+          new WaitCommand(Constants.kAutoWindupTime/2),
           new AutoIntakeRun(m_intake)
         )
       ),
-      new InstantCommand(() -> m_intake.IntakeRun(Constants.kStopSpeed)),
+      new InstantCommand(() -> m_intake.IntakeRun(Constants.kIntakeIn)),
       new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed))
     );
   }

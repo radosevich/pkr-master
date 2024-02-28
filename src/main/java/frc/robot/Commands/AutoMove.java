@@ -16,7 +16,9 @@ import edu.wpi.first.math.trajectory.Trajectory;
 import edu.wpi.first.math.trajectory.Trajectory.State;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.Subsystems.Drivetrain;
+import frc.robot.Subsystems.Intake;
 
 public class AutoMove extends Command {
   private Timer m_timer = new Timer();
@@ -24,6 +26,7 @@ public class AutoMove extends Command {
   private final Drivetrain m_drivetrain;
   private final int m_waypointIndex;
   private final boolean m_direction;
+  private final Intake m_intake;
   private int m_startPoseIndex;
   private int m_finalPoseIndex;
   private final RamseteController m_ramsete = new RamseteController();
@@ -48,13 +51,18 @@ public class AutoMove extends Command {
   public AutoMove(
     Drivetrain drivetrain, 
     int waypointIndex,
-    boolean direction) {
+    boolean direction,
+    Intake intake) {
     /** Creates a new Move command. */
     m_drivetrain = drivetrain;
     addRequirements(m_drivetrain);
 
     m_waypointIndex = waypointIndex;
     m_direction = direction;
+
+        m_intake = intake;
+    addRequirements(m_intake);
+
 
   }
 
@@ -92,15 +100,21 @@ public class AutoMove extends Command {
     State reference = m_trajectory.sample(elapsed);
     
     ChassisSpeeds speeds = m_ramsete.calculate(m_drivetrain.getPose(), reference);
-    m_drivetrain.manualDrive(-speeds.omegaRadiansPerSecond/4.5, -speeds.vxMetersPerSecond/4.5);
-    //m_drivetrain.manualDrive(speeds.vxMetersPerSecond, speeds.omegaRadiansPerSecond);
+    m_drivetrain.manualDrive(speeds.omegaRadiansPerSecond/Constants.kAutoDivisor, speeds.vxMetersPerSecond/Constants.kAutoDivisor);
     //System.out.println("Move.execute(" + m_drivetrain.getPose() + ")");
+    //m_intake.IntakeRun(Constants.kIntakeIn);
+    if (m_direction==kForward) {
+      m_intake.IntakeRun(Constants.kIntakeIn);
+    // } else {
+    //   m_intake.IntakeRun(Constants.kStopSpeed);
+    }
   }
 
   @Override
   public void end(boolean interrupted) {
-    System.out.println("Move.end(" + interrupted + ")");
+    System.out.println("Move.end(" + m_direction + ")");
     m_drivetrain.manualDrive(0, 0);
+    m_intake.IntakeRun(Constants.kStopSpeed);
   }
 
   @Override

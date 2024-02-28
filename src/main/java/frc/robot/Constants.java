@@ -16,6 +16,11 @@ public final class Constants {
 // Miscellanous
     public static final double kStopSpeed = 0.0; // stop motor speed
 
+// Auto
+    public static final double kAutoWindupTime = 1;
+    public static final double kAutoDivisor = 4;
+    
+
 // Climb Subsystem
    public static int kleftclimbID = 10;
    public static int krightclimbID = 9;

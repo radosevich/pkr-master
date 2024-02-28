@@ -61,8 +61,8 @@ public class RobotContainer {
     //     m_driveSubsystem));
     m_driveSubsystem.setDefaultCommand(
       new InstantCommand(() -> m_driveSubsystem.manualDrive(
-       -m_driverController.getRightX(), 
-        m_driverController.getLeftY()),
+       -m_driverController.getRightX(),
+       -m_driverController.getLeftY()), 
         m_driveSubsystem));
     // climb
     m_climb.setDefaultCommand(

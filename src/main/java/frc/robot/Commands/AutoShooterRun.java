@@ -46,6 +46,6 @@ public class AutoShooterRun extends Command {
   @Override
   public boolean isFinished() {
     //return false;
-    return timer.get() >= 2.0;
+    return timer.get() >= Constants.kAutoWindupTime;
   }
 }

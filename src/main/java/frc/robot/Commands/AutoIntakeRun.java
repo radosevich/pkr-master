@@ -26,7 +26,6 @@ public class AutoIntakeRun extends Command {
   public void initialize() {
     timer.reset();
     timer.start();
-    
   }
 
   // Called every time the scheduler runs while the command is scheduled.
@@ -46,6 +45,6 @@ public class AutoIntakeRun extends Command {
   @Override
   public boolean isFinished() {
     //return false;
-    return timer.get() >= 2.0;
+    return timer.get() >= Constants.kAutoWindupTime/2;
   }
 }
