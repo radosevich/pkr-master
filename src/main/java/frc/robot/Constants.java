@@ -17,9 +17,10 @@ public final class Constants {
     public static final double kStopSpeed = 0.0; // stop motor speed
 
 // Auto
-    public static final double kAutoWindupTime = 1;
+    public static final double kAutoWindupTime = 1.5;
     public static final double kAutoDivisor = 4;
-    
+    public static final double kPosAngle = 60;
+    public static final double kNegAngle = -60;
 
 // Climb Subsystem
    public static int kleftclimbID = 10;
@@ -38,10 +39,14 @@ public final class Constants {
 
     public static final double kDriveSpeed = 3.0; // Update this with your desired drive speed
     public static final double kMaxAngularSpeed = Math.PI; // Update this with your desired turn speed
-    public static final double kTrackWidth = 0.0508; // Update this with your desired track width
-    public static final double kWheelRadius = 0.0508; // Update this with your desired wheel radius
+    public static final double kTrackWidth = 0.55245; // Update this with your desired track width
+    public static final double kWheelRadius = 0.0762; // Update this with your desired wheel radius
     public static final double kEncoderResolution = 4096; // Update this with your desired resolution
-
+    public static final double kWheelDiameterInches = 6;
+    public static final double kEncoderDistancePerPulse =
+        // Assumes the encoders are directly mounted on the wheel shafts
+        (kWheelDiameterInches * Math.PI) / (double) kEncoderResolution;
+  
 // Intake Subsystem
     public static int kHighIntakeID = 5; // CAN value of kHighIntakeID
     public static int kLowIntakeID = 6; // CAN value of kLowIntakeID

@@ -45,6 +45,6 @@ public class AutoIntakeRun extends Command {
   @Override
   public boolean isFinished() {
     //return false;
-    return timer.get() >= Constants.kAutoWindupTime/2;
+    return timer.get() >= Constants.kAutoWindupTime;
   }
 }

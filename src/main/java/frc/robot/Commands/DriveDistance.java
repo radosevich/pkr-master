@@ -2,13 +2,13 @@
 // Open Source Software; you can modify and/or share it under the terms of
 // the WPILib BSD license file in the root directory of this project.
 
-package frc.robot.commands;
+package frc.robot.Commands;
 
-import frc.robot.subsystems.Drivetrain;
+import frc.robot.Subsystems.Drivetrain;
 import edu.wpi.first.wpilibj2.command.Command;
 
 public class DriveDistance extends Command {
-  private final Drivetrain m_drive;
+  private final Drivetrain m_Drivetrain;
   private final double m_distance;
   private final double m_speed;
 
@@ -23,33 +23,33 @@ public class DriveDistance extends Command {
   public DriveDistance(double speed, double inches, Drivetrain drive) {
     m_distance = inches;
     m_speed = speed;
-    m_drive = drive;
+    m_Drivetrain = drive;
     addRequirements(drive);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
-    m_drive.arcadeDrive(0, 0);
-    m_drive.resetEncoders();
+    m_Drivetrain.manualDrive(0,0);
+    m_Drivetrain.resetEncoders();
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    m_drive.arcadeDrive(m_speed, 0);
+    m_Drivetrain.manualDrive(m_speed, 0);
   }
 
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_drive.arcadeDrive(0, 0);
+    m_Drivetrain.manualDrive(0, 0);
   }
 
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
     // Compare distance travelled from start to desired distance
-    return Math.abs(m_drive.getAverageDistanceInch()) >= m_distance;
+    return Math.abs(m_Drivetrain.getAverageDistanceInch()) >= m_distance;
   }
 }

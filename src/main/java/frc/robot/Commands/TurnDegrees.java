@@ -44,7 +44,7 @@ public class TurnDegrees extends Command {
   // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    m_Drivetrain.arcadeDrive(0, 0);
+    m_Drivetrain.manualDrive(0, 0);
   }
 
   // Returns true when the command should end.
@@ -55,7 +55,7 @@ public class TurnDegrees extends Command {
        has a wheel placement diameter (149 mm) - width of the wheel (8 mm) = 141 mm
        or 5.551 inches. We then take into consideration the width of the tires.
     */
-    double inchPerDegree = Math.PI * 5.551 / 360;
+    double inchPerDegree = Math.PI * 18 / 360;
     // Compare distance travelled from start to distance based on degree turn
     return getAverageTurningDistance() >= (inchPerDegree * m_degrees);
   }

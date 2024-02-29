@@ -18,6 +18,9 @@ import edu.wpi.first.wpilibj2.command.RunCommand;
 import frc.robot.Commands.AutoCrescendo;
 import frc.robot.Commands.AutoDoNothing;
 import frc.robot.Commands.AutoLaunchNote;
+import frc.robot.Commands.AutoTurn;
+import frc.robot.Commands.CenterDrive;
+import frc.robot.Commands.DriveLine;
 import frc.robot.Subsystems.Camera;
 import frc.robot.Subsystems.Climb;
 import frc.robot.Subsystems.Drivetrain;
@@ -76,22 +79,36 @@ public class RobotContainer {
     // Setup autonomous select commands
     m_chooser = new SendableChooser<>();
 
-    m_chooser.setDefaultOption("Do nothing", 
-      new AutoDoNothing());
-    m_chooser.addOption("AutoLaunchNote", 
+
+    m_chooser.setDefaultOption("AutoLaunchNote", 
       new AutoLaunchNote(m_shooter, m_intake));
+
+    m_chooser.addOption("Do nothing", 
+      new AutoDoNothing());
+
     m_chooser.addOption("Red Left",
-      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 0));
+      new AutoTurn(Constants.kNegAngle, m_driveSubsystem, m_intake, m_shooter));
+
     m_chooser.addOption("Red Center", 
       new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 1));
+
     m_chooser.addOption("Red Right", 
-      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 2));
+     new AutoTurn(Constants.kPosAngle, m_driveSubsystem, m_intake, m_shooter));
+
     m_chooser.addOption("Blue Left",
-      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 3));
+    new AutoTurn(Constants.kPosAngle, m_driveSubsystem, m_intake, m_shooter));
+
     m_chooser.addOption("Blue Center", 
       new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 4));
+
     m_chooser.addOption("Blue Right", 
-      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 5));
+      new AutoTurn(Constants.kNegAngle, m_driveSubsystem, m_intake, m_shooter));
+
+    m_chooser.addOption("Cross the Line",
+      new DriveLine(m_driveSubsystem));
+      
+    m_chooser.addOption("Center 2", 
+    new CenterDrive(m_driveSubsystem, m_intake, m_shooter));
   
   SmartDashboard.putData("Chooser", m_chooser);
   }
@@ -104,7 +121,7 @@ public class RobotContainer {
       .onTrue(new InstantCommand(() -> m_intake.IntakeRun(Constants.kIntakeIn)))
       .onFalse(new InstantCommand(() -> m_intake.IntakeRun(Constants.kStopSpeed)));
 
-    new JoystickButton(m_driverController, Button.kX.value)
+    new JoystickButton(m_driverController, Button.kA.value)
     // Reverse the intake direction to clear a jam
       .onTrue(new InstantCommand(() -> m_intake.IntakeRun(Constants.kIntakeOut)))
       .onFalse(new InstantCommand(() -> m_intake.IntakeRun(Constants.kStopSpeed)));
@@ -119,10 +136,19 @@ public class RobotContainer {
       .onTrue(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kShooterEject)))
       .onFalse(new InstantCommand(() -> m_shooter.ShooterRun(Constants.kStopSpeed)));
 
-    new JoystickButton(m_driverController, Button.kA.value)
+    new JoystickButton(m_operatorController, Button.kLeftBumper.value)
         // Bind the operator joystick trigger button to the launch command
       .onTrue(new AutoLaunchNote(m_shooter, m_intake));
     
+
+
+// rip autolaunchnote
+
+
+
+
+
+
   }
 
   public Command getAutonomousCommand() {

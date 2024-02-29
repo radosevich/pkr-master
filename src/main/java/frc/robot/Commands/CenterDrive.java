@@ -1,7 +1,3 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.Commands;
 
 import frc.robot.Constants;
@@ -13,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import frc.robot.Subsystems.Drivetrain;
 import frc.robot.Commands.AutoIntakeRun;
 
-public class DriveLine extends SequentialCommandGroup {
+public class CenterDrive extends SequentialCommandGroup {
   /**
    * Creates a new Autonomous Drive based on distance. This will drive out for a specified distance,
    * turn around and drive back.
@@ -22,8 +18,13 @@ public class DriveLine extends SequentialCommandGroup {
    * @param m_intake 
    * @param m_shooter The drivetrain subsystem on which this command will run
    */
-  public DriveLine(Drivetrain m_Drivetrain) {
+  public CenterDrive(Drivetrain m_Drivetrain, Intake m_intake, Shooter m_shooter) {
     addCommands(
-        new DriveDistance(-0.5, 60, m_Drivetrain));
+        new AutoLaunchNote(m_shooter, m_intake),
+        new DriveDistance(-0.5, 65, m_Drivetrain),
+        new AutoIntakeRun(m_intake),
+        new DriveDistance(-0.5, -65, m_Drivetrain),
+        new AutoLaunchNote(m_shooter, m_intake));
+
   }
 }
