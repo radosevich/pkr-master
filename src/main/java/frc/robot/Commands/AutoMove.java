@@ -100,7 +100,7 @@ public class AutoMove extends Command {
     State reference = m_trajectory.sample(elapsed);
     
     ChassisSpeeds speeds = m_ramsete.calculate(m_drivetrain.getPose(), reference);
-    m_drivetrain.manualDrive(speeds.omegaRadiansPerSecond/Constants.kAutoDivisor, speeds.vxMetersPerSecond/Constants.kAutoDivisor);
+    m_drivetrain.manualDrive(speeds.vxMetersPerSecond/Constants.kAutoDivisor, speeds.omegaRadiansPerSecond/Constants.kAutoDivisor);
     //System.out.println("Move.execute(" + m_drivetrain.getPose() + ")");
     //m_intake.IntakeRun(Constants.kIntakeIn);
     if (m_direction==kForward) {

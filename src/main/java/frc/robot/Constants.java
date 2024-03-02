@@ -42,10 +42,10 @@ public final class Constants {
     public static final double kTrackWidth = 0.55245; // Update this with your desired track width
     public static final double kWheelRadius = 0.0762; // Update this with your desired wheel radius
     public static final double kEncoderResolution = 4096; // Update this with your desired resolution
-    public static final double kWheelDiameterInches = 6;
+    public static final double kWheelDiameterMeters = 0.152;
     public static final double kEncoderDistancePerPulse =
         // Assumes the encoders are directly mounted on the wheel shafts
-        (kWheelDiameterInches * Math.PI) / (double) kEncoderResolution;
+        (kWheelDiameterMeters * Math.PI) / (double) kEncoderResolution;
   
 // Intake Subsystem
     public static int kHighIntakeID = 5; // CAN value of kHighIntakeID

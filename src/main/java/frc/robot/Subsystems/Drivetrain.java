@@ -52,26 +52,25 @@ public class Drivetrain extends SubsystemBase {
     m_rightEncoder.reset();
     }
     
- /*  public int getLeftEncoderCount() {
+  public int getLeftEncoderCount() {
     return m_leftEncoder.get();
     }
     
   public int getRightEncoderCount() {
     return m_rightEncoder.get();
     }
-    */
-  public double getLeftDistanceInch() {
-    return m_leftEncoder.getDistance();
-    }
     
-  public double getRightDistanceInch() {
-    return m_rightEncoder.getDistance();
+    public double getLeftDistanceInch() {
+      return m_leftEncoder.getDistance();
     }
-    
-  public double getAverageDistanceInch() {
-    return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
+  
+    public double getRightDistanceInch() {
+      return m_rightEncoder.getDistance();
     }
-
+  
+    public double getAverageDistanceInch() {
+      return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
+    }
   // Gyro
   private final AnalogGyro m_gyro;
   

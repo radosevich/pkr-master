@@ -110,7 +110,8 @@ public class RobotContainer {
     m_chooser.addOption("Center 2", 
     new CenterDrive(m_driveSubsystem, m_intake, m_shooter));
   
-  SmartDashboard.putData("Chooser", m_chooser);
+  //SmartDashboard.putData("Chooser", m_chooser);
+  SmartDashboard.putData(m_chooser);
   }
   
   private void configureBindings() {
