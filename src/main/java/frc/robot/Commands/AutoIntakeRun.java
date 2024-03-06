@@ -12,12 +12,14 @@ import frc.robot.Subsystems.Intake;
 public class AutoIntakeRun extends Command {
   private Timer timer;
   private final Intake m_intake;
+  private final double m_time;
 
   /** Creates a new AutoIntakeRun. */
-  public AutoIntakeRun(Intake intake) {
+  public AutoIntakeRun(Intake intake, double time) {
     System.out.println("AutoIntakeRun()");
     timer = new Timer();
     m_intake = intake;
+    m_time = time;
     addRequirements(m_intake);
   }
 
@@ -45,6 +47,6 @@ public class AutoIntakeRun extends Command {
   @Override
   public boolean isFinished() {
     //return false;
-    return timer.get() >= Constants.kAutoWindupTime;
+    return timer.get() >= m_time;
   }
 }

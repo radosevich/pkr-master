@@ -12,12 +12,14 @@ import frc.robot.Subsystems.Shooter;
 public class AutoShooterRun extends Command {
   private Timer timer;
   private final Shooter m_shooter;
+  private final double m_time;
 
   /** Creates a new AutoShooterRun. */
-  public AutoShooterRun(Shooter shooter) {
+  public AutoShooterRun(Shooter shooter, double time) {
     System.out.println("AutoShooterRun()");
     timer = new Timer();
     m_shooter = shooter;
+    m_time = time;
     addRequirements(m_shooter);
     // Use addRequirements() here to declare subsystem dependencies.
   }
@@ -46,6 +48,6 @@ public class AutoShooterRun extends Command {
   @Override
   public boolean isFinished() {
     //return false;
-    return timer.get() >= Constants.kAutoWindupTime;
+    return timer.get() >= m_time;
   }
 }

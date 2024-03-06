@@ -17,7 +17,7 @@ public final class Constants {
     public static final double kStopSpeed = 0.0; // stop motor speed
 
 // Auto
-    public static final double kAutoWindupTime = 1.5;
+    public static final double kAutoWindupTime = 2;
     public static final double kAutoDivisor = 4;
     public static final double kPosAngle = 60;
     public static final double kNegAngle = -60;

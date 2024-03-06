@@ -4,8 +4,6 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Joystick.ButtonType;
 import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -14,13 +12,9 @@ import edu.wpi.first.wpilibj.XboxController.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
-import edu.wpi.first.wpilibj2.command.RunCommand;
-import frc.robot.Commands.AutoCrescendo;
 import frc.robot.Commands.AutoDoNothing;
 import frc.robot.Commands.AutoLaunchNote;
-import frc.robot.Commands.AutoTurn;
-import frc.robot.Commands.CenterDrive;
-import frc.robot.Commands.DriveLine;
+import frc.robot.Commands.Movement1;
 import frc.robot.Subsystems.Camera;
 import frc.robot.Subsystems.Climb;
 import frc.robot.Subsystems.Drivetrain;
@@ -83,32 +77,13 @@ public class RobotContainer {
     m_chooser.setDefaultOption("AutoLaunchNote", 
       new AutoLaunchNote(m_shooter, m_intake));
 
+    m_chooser.addOption("Center 12", 
+      new Movement1(m_driveSubsystem, m_shooter, m_intake));
+
     m_chooser.addOption("Do nothing", 
       new AutoDoNothing());
 
-    m_chooser.addOption("Red Left",
-      new AutoTurn(Constants.kNegAngle, m_driveSubsystem, m_intake, m_shooter));
-
-    m_chooser.addOption("Red Center", 
-      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 1));
-
-    m_chooser.addOption("Red Right", 
-     new AutoTurn(Constants.kPosAngle, m_driveSubsystem, m_intake, m_shooter));
-
-    m_chooser.addOption("Blue Left",
-    new AutoTurn(Constants.kPosAngle, m_driveSubsystem, m_intake, m_shooter));
-
-    m_chooser.addOption("Blue Center", 
-      new AutoCrescendo(m_driveSubsystem, m_intake, m_shooter, 4));
-
-    m_chooser.addOption("Blue Right", 
-      new AutoTurn(Constants.kNegAngle, m_driveSubsystem, m_intake, m_shooter));
-
-    m_chooser.addOption("Cross the Line",
-      new DriveLine(m_driveSubsystem));
-      
-    m_chooser.addOption("Center 2", 
-    new CenterDrive(m_driveSubsystem, m_intake, m_shooter));
+    
   
   //SmartDashboard.putData("Chooser", m_chooser);
   SmartDashboard.putData(m_chooser);
